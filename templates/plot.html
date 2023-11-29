@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<label for="toothpaste">ToothPaste:</label>
+<input type="text" id="toothpaste" name="ToothPaste" value=""><br>
+
+<label for="facecream">Face Cream:</label>
+<input type="text" id="facecream" name="FaceCream" value=""><br>
+
+<label for="facewash">Face Wash:</label>
+<input type="text" id="facewash" name="FaceWash" value=""><br>
+
+<label for="bathingsoap">Bathing Soap:</label>
+<input type="text" id="bathingsoap" name="Bathing Soap" value=""><br>
+
+<label for="shampoo">Shampoo:</label>
+<input type="text" id="shampoo" name="Shampoo" value=""><br>
+
+<label for="moisturizer">Moisturizer:</label>
+<input type="text" id="moisturizer" name="Moisturizer" value=""><br>
+
+<button type="button" onclick="submit()">Click</button>
+
+<img id="myImage" src="" style="width:300px">
+
+<script>
+async function submit() {
+    event.preventDefault();
+
+    let toothpaste = document.getElementById("toothpaste").value;
+    let facecream = document.getElementById("facecream").value;
+    let facewash = document.getElementById("facewash").value;
+    let bathingsoap = document.getElementById("bathingsoap").value;
+    let shampoo = document.getElementById("shampoo").value;
+    let moisturizer = document.getElementById("moisturizer").value;
+
+    let form = new FormData();
+    form.append("ToothPaste", toothpaste);
+    form.append("FaceCream", facecream);
+    form.append("FaceWash", facewash);
+    form.append("Bathing Soap", bathingsoap);
+    form.append("Shampoo", shampoo);
+    form.append("Moisturizer", moisturizer);
+
+    const response = await fetch('/numbers', {
+        method: 'POST',
+        body: form,
+    });
+    const img = await response.text();
+    console.log(img);
+    document.getElementById('myImage').src = img;
+}
+</script>
+
+</body>
+</html>
